@@ -9,6 +9,7 @@ from .serializers import GameSerializer
 
 
 class JSONResponse(HttpResponse):
+
     def __init__(self, data, **kwargs):
         content = JSONRenderer().render(data)
         kwargs['content_type'] = 'application/json'
