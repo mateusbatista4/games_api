@@ -30,7 +30,7 @@ def game_collection(request):
             return JSONResponse(game_serializer.data, status=status.HTTP_201_CREATED)
         return JSONResponse(game_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@csrf_exempt
+
 def game_detail(request, id):
     try:
         game = Game.objects.get(id=id)
