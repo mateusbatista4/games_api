@@ -19,7 +19,7 @@ class Game(models.Model):
     release_date = models.DateTimeField()
     esrb_rating = models.ForeignKey(
         EsrbRating,
-        related_name='games',
+        related_name = 'games',
         on_delete=models.CASCADE
     )
     played_once = models.BooleanField(default=False)
@@ -31,19 +31,23 @@ class Game(models.Model):
     def __str__(self):
         return self.name
 
+
 class Player(models.Model):
+    name = models.CharField(max_length=200,default='')
+
     MALE = 'M'
     FEMALE = 'F'
     GENDER_CHOICES = (
-        (MALE,'Fale'),
+        (MALE,'Male'),
         (FEMALE,'Female')
     )
     created = models.DateTimeField(auto_now_add=True)
-    name = models.CharField(
-        max_length=50,
-        choices=GENDER_CHOICES,
+    gender = models.CharField(
+        max_length= 50,
+        choices =GENDER_CHOICES,
         default= MALE
-    )
+    ),
+
     class Meta:
         ordering = ('name',)
 
@@ -65,3 +69,6 @@ class PlayerScore(models.Model):
 
     class Meta:
         ordering = ('-score',)
+
+    def __str__(self):
+        return self.game.name +' - ' +self.player.name+ ' score'

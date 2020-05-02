@@ -1,9 +1,13 @@
+
 from .models import Game, EsrbRating, Player, PlayerScore
 from rest_framework import serializers
-import gamesservice.games.views
+from rest_framework import generics
+
+
 
 
 class EsrbRatingSerializer(serializers.HyperlinkedModelSerializer):
+
     games = serializers.HyperlinkedRelatedField(
         many=True,
         read_only=True,
@@ -34,7 +38,8 @@ class ScoreSerializer(serializers.HyperlinkedModelSerializer):
         fields = '__all__'
 
 
-class PlayerSerializerClass(serializers.HyperlinkedModelSerializer):
+class PlayerSerializer(serializers.HyperlinkedModelSerializer):
+
     scores = ScoreSerializer(many=True, read_only=True)
     gender = serializers.ChoiceField(
         choices=Player.GENDER_CHOICES
